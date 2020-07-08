@@ -6,13 +6,13 @@
 
 * Usa YAML
 
-* Suporta Windows, MaxOS y Linux
+* Soporta Windows, MaxOS y Linux
 
-* Cualquier lenguaje de programación 
+* Soporta cualquier lenguaje de programación que corra en los OS anteriores
 
-* Podes crear tus propios Runners
+* Podes crear tus propios Runners privados
 
-* Puede ser disparado por PR y Community ademas en base a ciertos Github events como
+* Puede ser disparado por cambios y PR ademas en base a ciertos Github events como:
 
   Creación de Issues, Comentarios, agregado de un nuevo usuario al repo, etc
 
