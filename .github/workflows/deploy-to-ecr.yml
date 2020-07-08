@@ -19,13 +19,12 @@ jobs:
      with:
        aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
        aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
-       aws-region: $AWS-REGION
+       aws-region: us-east-1
 
    - name: Build and Push image to ECR
      run: |
-       $(aws ecr get-login --no-include-email --region $AWS-REGION)
+       $(aws ecr get-login --no-include-email --region us-east-1)
        docker build -t $REPOSITORY_URL:$GITHUB_SHA .
        docker push $REPOSITORY_URL:$GITHUB_SHA
      env:
        REPOSITORY_URL: 905675428251.dkr.ecr.us-east-1.amazonaws.com/github-actions-demo
-       AWS-REGION: us-east-1
