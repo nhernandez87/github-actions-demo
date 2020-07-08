@@ -24,7 +24,7 @@ jobs:
    - name: Build and Push image to ECR
      run: |
        $(aws ecr get-login --no-include-email --region us-east-1)
-       docker build -t $REPOSITORY_URL:$GITHUB_SHA .
-       docker push $REPOSITORY_URL:$GITHUB_SHA
+       docker build -t 905675428251.dkr.ecr.us-east-1.amazonaws.com/github-actions-demo:$GITHUB_SHA .
+       docker push 905675428251.dkr.ecr.us-east-1.amazonaws.com/github-actions-demo:$GITHUB_SHA
        env:
          REPOSITORY_URL: 905675428251.dkr.ecr.us-east-1.amazonaws.com/github-actions-demo
