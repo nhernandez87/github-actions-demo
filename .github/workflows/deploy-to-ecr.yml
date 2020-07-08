@@ -2,8 +2,8 @@ name: Deploy to ECR
 
 on:
   push:
-    branches: [ master ]
-    tags:
+    tags-ignore: 
+      - 0.*
         
 jobs:
  build:
