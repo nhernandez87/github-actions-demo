@@ -27,5 +27,5 @@ jobs:
        docker build -t $REPOSITORY_URL:$GITHUB_REF .
        docker push $REPOSITORY_URL:$GITHUB_REF
        env:
-         $REPOSITORY_URL: 905675428251.dkr.ecr.us-east-1.amazonaws.com/github-actions-demo
-         $AWS-REGION: us-east-1
+         REPOSITORY_URL: 905675428251.dkr.ecr.us-east-1.amazonaws.com/github-actions-demo
+         AWS-REGION: us-east-1
