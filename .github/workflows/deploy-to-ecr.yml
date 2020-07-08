@@ -4,44 +4,28 @@ on:
   push:
     branches: [ master ]
     tags:
-    
-jobs:
-  build:
-    name: build and publish image
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - name: hadolint on pr
-      uses: burdzwastaken/hadolint-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        HADOLINT_ACTION_DOCKERFILE_FOLDER: .
         
- jobs:
-  build:
-    name: build and publish image
-    runs-on: ubuntu-latest
+jobs:
+ build:
+   name: build and publish image
+   runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+   steps:
+   - name: Checkout
+     uses: actions/checkout@v2
 
-    - name: Configure AWS credentials from Prodd account
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
-        aws-region: $AWS-REGION
+   - name: Configure AWS credentials from Prodd account
+     uses: aws-actions/configure-aws-credentials@v1
+     with:
+       aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+       aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+       aws-region: $AWS-REGION
 
-    - name: Build and Push image to ECR
-      run: |
-        $(aws ecr get-login --no-include-email --region us-east-1)
-        docker build -t $REPOSITORY_URL:$GITHUB_REF .
-        docker push $REPOSITORY_URL:$GITHUB_REF
-        env:
-          $REPOSITORY_URL: 905675428251.dkr.ecr.us-east-1.amazonaws.com/github-actions-demo
-          $AWS-REGION: us-east-1
-
-
-
-
+   - name: Build and Push image to ECR
+     run: |
+       $(aws ecr get-login --no-include-email --region us-east-1)
+       docker build -t $REPOSITORY_URL:$GITHUB_REF .
+       docker push $REPOSITORY_URL:$GITHUB_REF
+       env:
+         $REPOSITORY_URL: 905675428251.dkr.ecr.us-east-1.amazonaws.com/github-actions-demo
+         $AWS-REGION: us-east-1
