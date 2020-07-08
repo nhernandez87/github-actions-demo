@@ -123,7 +123,8 @@ ____
 * No tiene una funcionalidad nativa para disparar un trigger manualmente 
 * No tiene una funcionalidad nativa para manual approval
 
-_Los dos últimos puntos parece ser que ayer se agrego la funcionalidad https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch_
+_Los dos últimos fueron solucionados hace pocos dias_ 
+https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch
 
 
 
