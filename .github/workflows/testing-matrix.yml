@@ -1,23 +1,30 @@
-name: CI (pip)
+name: CI
+
 on: [push]
 
 jobs:
-  build:
+  test:
+    name: Test on node ${{ matrix.node }} and ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
-        python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
-    runs-on: ubuntu-latest
+        node: [8, 10, 12]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+      - uses: actions/checkout@v1
+      - name: Use node ${{ matrix.node }}
+        uses: actions/setup-node@v1
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install -r requirements-dev.txt
-          # install black if available (Python 3.6 and above)
-          pip install black || true
+          node-version: ${{ matrix.node }}
+          registry-url: https://registry.npmjs.org
+      - name: install
+        run: npm install
+      - name: lint
+        run: npm run lint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm test
