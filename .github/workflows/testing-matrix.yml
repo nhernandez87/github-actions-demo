@@ -1,31 +1,23 @@
-name: Run tests
-
+name: CI (pip)
 on: [push]
 
-jobs:  
-  testing:
-    runs-on: ubuntu-latest
+jobs:
+  build:
     strategy:
       matrix:
-        node-version: [11.2, 10.16, 12.5]
-        mongodb-version: [4.0, 4.2]
-
+        python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
+    runs-on: ubuntu-latest
     steps:
-    - name: Git checkout
-      uses: actions/checkout@v1
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Start MongoDB v${{ matrix.node-version }}
-      uses: superchargejs/mongodb-github-action@1.0.0
-      with:
-        mongodb-version: ${{ matrix.mongodb-version }}
-
-    - run: npm install
-
-    - run: npm test
-      env:
-        CI: true
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+          # install black if available (Python 3.6 and above)
+          pip install black || true
