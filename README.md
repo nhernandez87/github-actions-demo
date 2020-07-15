@@ -4,7 +4,7 @@
 
 ### Principales características
 
-* Usa YAML
+* Usa YAML.
 
 * Soporta Windows, MaxOS y Linux
 
