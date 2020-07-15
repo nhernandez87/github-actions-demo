@@ -1,5 +1,4 @@
 FROM golang:alpine
-MAINTAINER Nahuel Hernandez
 COPY ./src /go/src/app
 WORKDIR /go/src/app
 ENV PORT=3001
